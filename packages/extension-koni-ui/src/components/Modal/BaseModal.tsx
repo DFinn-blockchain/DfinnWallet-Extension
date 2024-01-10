@@ -60,6 +60,10 @@ export const BaseModal = styled(Component)<Props>(({ theme: { token } }: Props) 
 
       '.ant-sw-list-section .ant-sw-list-wrapper': {
         flexBasis: 'auto'
+      },
+
+      '.ant-sw-modal-body': {
+        flex: 1
       }
     },
 

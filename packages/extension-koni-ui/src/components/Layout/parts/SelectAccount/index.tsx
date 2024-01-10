@@ -397,6 +397,7 @@ const SelectAccount = styled(Component)<Props>(({ theme }) => {
     '&.ant-sw-modal': {
       '.ant-sw-modal-body': {
         minHeight: 370,
+        flexGrow: 0,
         marginBottom: 0
       },
 
