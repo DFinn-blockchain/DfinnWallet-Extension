@@ -76,7 +76,8 @@
     "jest-environment-jsdom": "^29.5.0",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
-    "sinon-chrome": "^3.0.1"
+    "sinon-chrome": "^3.0.1",
+    "webpack-dev-server": "^4.15.1"
   },
   "resolutions": {
     "@ethereumjs/common": "^2.6.5",

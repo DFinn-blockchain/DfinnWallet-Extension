@@ -13,10 +13,11 @@ import { useSelector } from 'react-redux';
 import styled, { createGlobalStyle, ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
 
 import { Theme } from '../types';
+import buttonBackground from '../assets/button-background.svg';
 
 interface Props {
   children: React.ReactNode;
-  themeConfig: SwThemeConfig
+  themeConfig: SwThemeConfig;
 }
 
 const { useToken } = reactUiTheme;
@@ -26,15 +27,108 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
 
   applyPreloadStyle(extendToken.bodyBackgroundColor);
 
-  return ({
-    body: {
+  return {
+    'body *': {
       fontFamily: token.fontFamily,
-      color: token.colorText,
       fontWeight: token.bodyFontWeight
     },
+
+    button: {
+      color: '#000'
+    },
+
     pre: {
       fontFamily: 'inherit',
       whiteSpace: 'pre-wrap'
+    },
+
+    '.ant-sw-list .ant-web3-block': {
+      borderRadius: '32px',
+      backgroundImage: 'var(--Holo-primary1,     conic-gradient(        from 180deg at 50% 50%,         rgba(192, 192, 192, 0.78) 16.875deg,         rgba(173, 216, 230, 0.78) 55deg,         rgba(192, 192, 192, 0.78) 88.12500178813934deg,         rgba(255, 182, 193, 0.78) 225deg,         rgba(173, 216, 230, 0.78) 288.7499928474426deg,         rgba(221, 160, 221, 0.78) 360deg    ),     conic-gradient(        from 180deg at 50% 50%,         #FFF 30.00000089406967deg,         #000 95.625deg,         #FFF 168.75deg,         #000 228.75000715255737deg,         #FFF 285.0000071525574deg,         #000 360deg    ),     radial-gradient(        116.62% 141.42% at 0% 0%,         #000 7.61%,         #C0C0C0 57.81%,         #000 100%    ))',
+      transition: 'transform 0.3s ease',
+    },
+
+    '.side-menu-item': {
+      border: '1px solid #212121 !important',
+      background: '#141414 !important',
+      transition: 'background'
+    },
+
+    '.ant-btn.__sidebar-collapse-trigger': {
+      color: '#fff !important'
+    },
+
+    'tr td:first-child': {
+      borderTopLeftRadius: '32px !important',
+      borderBottomLeftRadius: '32px !important'
+    },
+    
+    'tr td:last-child': {
+      borderTopRightRadius: '32px !important',
+      borderBottomRightRadius: '32px !important'
+    },
+
+    '.welcome-import-button-title, .earning-item-reward *, .welcome-import-button-content *, .earning-item-name, .earning-item-reward, .button-group *': {
+      color: '#000 !important'
+    },
+
+    '.ant-sw-modal-title, .ant-sw-screen-layout-body, .web-layout-content, .ant-sw-screen-layout-container, .web-layout-content *': {
+      overflow: 'visible !important'
+    },
+
+    '.ant-btn, .setting-item': {
+      color: '#000 !important',
+      borderRadius: '40px !important',
+      border: '2px solid #000',
+      outline: '3px solid #fff',
+      background: `url(${buttonBackground}) no-repeat, lightgray`,
+      backgroundSize: 'cover',
+      backgroundPosition: '50% 50%',
+      transition: 'transform 0.3s ease',
+
+      '& .ant-setting-item-name': {
+        color: '#000'
+      },
+
+      '& .ant-web3-block:hover': {
+        backgroundColor: 'transparent !important'
+      }
+    },
+
+    '.ant-btn:hover, .setting-item:hover, .ant-sw-list .ant-web3-block:hover': {
+      transform: 'translate(0, -3px)'
+    },
+
+    '.ant-btn:active, button:disabled': {
+      filter: 'brightness(0.5)'
+    },
+
+    'ant-btn-ghost:hover': {
+      transform: 'none !important'
+    },
+
+    '.ant-input-container, .-shape-default:before, .ant-select-modal-item .ant-setting-item, .phrase-number-selector-input, .social-button, .type-warning, .term-box': {
+      backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%) !important',
+      backgroundColor: 'transparent !important',
+      borderRadius: '34px !important',
+      transition: 'background-image, transform 0.3s ease'
+    },
+
+    '.ant-select-modal-item .ant-web3-block:hover': {
+      borderRadius: '34px !important',
+      backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important'
+    },
+
+    '.ant-input-container:hover, wallet-item:hover, .ant-select-modal-input-container:hover::before': {
+      borderRadius: '34px !important'
+    },
+
+    '.ant-squircle': {
+      mask: 'none !important'
+    },
+
+    '.social-button svg': {
+        fill: 'rgb(37, 149, 230)'
     },
 
     '.loading-icon': {
@@ -265,7 +359,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
         }
       }
     }
-  });
+  };
 });
 
 function ThemeGenerator ({ children, themeConfig }: Props): React.ReactElement<Props> {

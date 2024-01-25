@@ -23,12 +23,7 @@ import SelectAccountType from '../../components/Account/SelectAccountType';
 
 type Props = ThemeProps;
 
-const FooterIcon = (
-  <Icon
-    phosphorIcon={FileArrowDown}
-    weight='fill'
-  />
-);
+const FooterIcon = <Icon phosphorIcon={FileArrowDown} weight='fill' />;
 
 const formName = 'import-seed-phrase-form';
 const fieldNamePrefix = 'seed-phrase-';
@@ -83,94 +78,110 @@ const Component: React.FC<Props> = ({ className }: Props) => {
   const [showSeed, setShowSeed] = useState(false);
   const checkUnlock = useUnlockChecker();
 
-  const phraseNumberItems = useMemo(() => [12, 24].map((value) => ({
-    label: t('{{number}} words', { replace: { number: value } }),
-    value: String(value)
-  })), [t]);
+  const phraseNumberItems = useMemo(
+    () =>
+      [12, 24].map((value) => ({
+        label: t('{{number}} words', { replace: { number: value } }),
+        value: String(value)
+      })),
+    [t]
+  );
 
-  const formDefault: FormState = useMemo(() => ({
-    phraseNumber: '12',
-    trigger: 'trigger'
-  }), []);
+  const formDefault: FormState = useMemo(
+    () => ({
+      phraseNumber: '12',
+      trigger: 'trigger'
+    }),
+    []
+  );
 
-  const onFieldsChange: FormCallbacks<FormState>['onFieldsChange'] = useCallback((changedFields: FormFieldData[], allFields: FormFieldData[]) => {
-    const { empty, error } = simpleCheckForm(allFields);
+  const onFieldsChange: FormCallbacks<FormState>['onFieldsChange'] = useCallback(
+    (changedFields: FormFieldData[], allFields: FormFieldData[]) => {
+      const { empty, error } = simpleCheckForm(allFields);
 
-    const { phraseNumber } = convertFieldToObject<FormState>(changedFields);
+      const { phraseNumber } = convertFieldToObject<FormState>(changedFields);
 
-    if (phraseNumber) {
-      form.validateFields(['trigger']).finally(noop);
-    }
-
-    setDisabled(empty || error);
-  }, [form]);
-
-  const onFinish: FormCallbacks<FormState>['onFinish'] = useCallback((values: FormState) => {
-    const { phraseNumber: _phraseNumber } = values;
-    const seedKeys = Object.keys(values).filter((key) => key.startsWith(fieldNamePrefix));
-    const phraseNumber = parseInt(_phraseNumber);
-
-    if (![12, 15, 18, 21, 24].includes(seedKeys.length)) {
-      throw Error(t('Mnemonic needs to contain 12, 15, 18, 21, 24 words'));
-    }
-
-    const seeds: string[] = [];
-
-    for (let i = 0; i < phraseNumber; i++) {
-      seeds.push(values[`${fieldNamePrefix}${i}`]);
-    }
-
-    if (seeds.some((value) => !value)) {
-      throw Error(t('Mnemonic needs to contain 12, 15, 18, 21, 24 words'));
-    }
-
-    const seed = seeds.join(' ');
-
-    if (seed) {
-      checkUnlock()
-        .then(() => {
-          setSubmitting(true);
-          validateSeedV2(seed, DEFAULT_ACCOUNT_TYPES)
-            .then(() => {
-              return createAccountSuriV2({
-                name: accountName,
-                suri: seed,
-                isAllowed: true,
-                types: keyTypes
-              });
-            })
-            .then(() => {
-              onComplete();
-            })
-            .catch((error: Error): void => {
-              notification({
-                type: 'error',
-                message: error.message
-              });
-            })
-            .finally(() => {
-              setSubmitting(false);
-            });
-        })
-        .catch(() => {
-          // Unlock is cancelled
-        });
-    }
-  }, [t, checkUnlock, accountName, keyTypes, onComplete, notification]);
-
-  const seedValidator = useCallback((rule: FormRule, value: string) => {
-    return new Promise<void>((resolve, reject) => {
-      if (!value) {
-        reject(new Error(t('This field is required')));
+      if (phraseNumber) {
+        form.validateFields(['trigger']).finally(noop);
       }
 
-      if (!words.includes(value)) {
-        reject(new Error(t('Invalid word')));
+      setDisabled(empty || error);
+    },
+    [form]
+  );
+
+  const onFinish: FormCallbacks<FormState>['onFinish'] = useCallback(
+    (values: FormState) => {
+      const { phraseNumber: _phraseNumber } = values;
+      const seedKeys = Object.keys(values).filter((key) => key.startsWith(fieldNamePrefix));
+      const phraseNumber = parseInt(_phraseNumber);
+
+      if (![12, 15, 18, 21, 24].includes(seedKeys.length)) {
+        throw Error(t('Mnemonic needs to contain 12, 15, 18, 21, 24 words'));
       }
 
-      resolve();
-    });
-  }, [t]);
+      const seeds: string[] = [];
+
+      for (let i = 0; i < phraseNumber; i++) {
+        seeds.push(values[`${fieldNamePrefix}${i}`]);
+      }
+
+      if (seeds.some((value) => !value)) {
+        throw Error(t('Mnemonic needs to contain 12, 15, 18, 21, 24 words'));
+      }
+
+      const seed = seeds.join(' ');
+
+      if (seed) {
+        checkUnlock()
+          .then(() => {
+            setSubmitting(true);
+            validateSeedV2(seed, DEFAULT_ACCOUNT_TYPES)
+              .then(() => {
+                return createAccountSuriV2({
+                  name: accountName,
+                  suri: seed,
+                  isAllowed: true,
+                  types: keyTypes
+                });
+              })
+              .then(() => {
+                onComplete();
+              })
+              .catch((error: Error): void => {
+                notification({
+                  type: 'error',
+                  message: error.message
+                });
+              })
+              .finally(() => {
+                setSubmitting(false);
+              });
+          })
+          .catch(() => {
+            // Unlock is cancelled
+          });
+      }
+    },
+    [t, checkUnlock, accountName, keyTypes, onComplete, notification]
+  );
+
+  const seedValidator = useCallback(
+    (rule: FormRule, value: string) => {
+      return new Promise<void>((resolve, reject) => {
+        if (!value) {
+          reject(new Error(t('This field is required')));
+        }
+
+        if (!words.includes(value)) {
+          reject(new Error(t('Invalid word')));
+        }
+
+        resolve();
+      });
+    },
+    [t]
+  );
 
   const toggleShow = useCallback(() => {
     setShowSeed((value) => !value);
@@ -191,83 +202,56 @@ const Component: React.FC<Props> = ({ className }: Props) => {
       <Layout.WithSubHeaderOnly
         onBack={onBack}
         rightFooterButton={isWebUI ? undefined : buttonProps}
-        subHeaderIcons={isWebUI
-          ? undefined
-          : ([
-            {
-              icon: <CloseIcon />,
-              onClick: goHome
-            }
-          ])}
+        subHeaderIcons={
+          isWebUI
+            ? undefined
+            : [
+                {
+                  icon: <CloseIcon />,
+                  onClick: goHome
+                }
+              ]
+        }
         title={t<string>('Import from seed phrase')}
       >
         <div className='container'>
           <div className='description'>
             {!isWebUI && t('To import an existing account,\n please enter seed phrase.')}
-            { isWebUI && t('To import an existing existing account, please select account type and enter the recovery seed phrase here:')}
+            {isWebUI && t('To import an existing existing account, please select account type and enter the recovery seed phrase here:')}
           </div>
-          <Form
-            className='form-container form-space-xs'
-            form={form}
-            initialValues={formDefault}
-            name={formName}
-            onFieldsChange={onFieldsChange}
-            onFinish={onFinish}
-          >
+          <Form className='form-container form-space-xs' form={form} initialValues={formDefault} name={formName} onFieldsChange={onFieldsChange} onFinish={onFinish}>
             <Form.Item name={'phraseNumber'}>
-              <PhraseNumberSelector
-                items={phraseNumberItems}
-              />
+              <PhraseNumberSelector items={phraseNumberItems} />
             </Form.Item>
-            <Form.Item
-              hidden={true}
-              name='trigger'
-            >
+            <Form.Item hidden={true} name='trigger'>
               <Input />
             </Form.Item>
             <div className='content-container'>
               <div className='button-container'>
-                <Button
-                  icon={(
-                    <Icon
-                      customSize={isWebUI ? '28px' : undefined}
-                      phosphorIcon={showSeed ? EyeSlash : Eye}
-                      size='sm'
-                    />
-                  )}
-                  onClick={toggleShow}
-                  size='xs'
-                  type='ghost'
-                >
+                <Button icon={<Icon customSize={isWebUI ? '28px' : undefined} phosphorIcon={showSeed ? EyeSlash : Eye} size='sm' />} onClick={toggleShow} size='xs' type='ghost'>
                   {showSeed ? t('Hide seed phrase') : t('Show seed phrase')}
                 </Button>
               </div>
               <div className='seed-container'>
-                {
-                  new Array(parseInt(phraseNumber || '12')).fill(null).map((value, index) => {
-                    const name = fieldNamePrefix + String(index);
+                {new Array(parseInt(phraseNumber || '12')).fill(null).map((value, index) => {
+                  const name = fieldNamePrefix + String(index);
 
-                    return (
-                      <Form.Item
-                        key={index}
-                        name={name}
-                        rules={[{
+                  return (
+                    <Form.Item
+                      key={index}
+                      name={name}
+                      rules={[
+                        {
                           validator: seedValidator
-                        }]}
-                        statusHelpAsTooltip={isWebUI}
-                        validateTrigger={['onChange']}
-                      >
-                        <SeedPhraseInput
-                          form={form}
-                          formName={formName}
-                          hideText={!showSeed}
-                          index={index}
-                          prefix={fieldNamePrefix}
-                        />
-                      </Form.Item>
-                    );
-                  })
-                }
+                        }
+                      ]}
+                      statusHelpAsTooltip={isWebUI}
+                      validateTrigger={['onChange']}
+                    >
+                      <SeedPhraseInput form={form} formName={formName} hideText={!showSeed} index={index} prefix={fieldNamePrefix} />
+                    </Form.Item>
+                  );
+                })}
               </div>
             </div>
           </Form>
@@ -275,25 +259,15 @@ const Component: React.FC<Props> = ({ className }: Props) => {
           {isWebUI && (
             <>
               <div className='__select-account-type'>
-                <SelectAccountType
-                  selectedItems={localKeyTypes}
-                  setSelectedItems={setLocalKeyTypes}
-                />
+                <SelectAccountType selectedItems={localKeyTypes} setSelectedItems={setLocalKeyTypes} />
               </div>
 
-              <Button
-                {...buttonProps}
-                block={true}
-                className='__submit-button'
-                disabled={disabled || !keyTypes.length}
-              />
+              <Button {...buttonProps} block={true} className='__submit-button' disabled={disabled || !keyTypes.length} />
             </>
           )}
         </div>
 
-        {isWebUI && (
-          <InstructionContainer contents={instructionContent} />
-        )}
+        {isWebUI && <InstructionContainer contents={instructionContent} />}
       </Layout.WithSubHeaderOnly>
     </PageWrapper>
   );
@@ -301,6 +275,8 @@ const Component: React.FC<Props> = ({ className }: Props) => {
 
 const ImportSeedPhrase = styled(Component)<Props>(({ theme: { token } }: Props) => {
   return {
+    
+
     '.container': {
       padding: token.padding
     },
@@ -388,7 +364,13 @@ const ImportSeedPhrase = styled(Component)<Props>(({ theme: { token } }: Props) 
       },
 
       '.instruction-container': {
-        flex: 1
+        flex: 1,
+        '& > div:nth-child(1), & > div:nth-child(2)': {
+          backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
+          backgroundColor: 'transparent',
+          borderRadius: '34px',
+          transition: 'background-image, transform 0.3s ease'
+        }
       }
     }
   };

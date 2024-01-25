@@ -144,12 +144,16 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
 
 export const UnlockModal = styled(Component)<Props>(({ theme: { token } }: Props) => {
   return ({
+
+    '.ant-sw-modal-content': {
+      borderRadius: '32px',
+    },
     '.__action-item + .__action-item': {
       marginTop: token.marginXS
     },
 
     '.ant-sw-modal-body': {
       paddingBottom: 0
-    }
+    },
   });
 });

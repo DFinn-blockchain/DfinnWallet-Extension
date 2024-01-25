@@ -9,12 +9,13 @@ import CN from 'classnames';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-type Props = ThemeProps & SwModalProps & {
-  fullSizeOnMobile?: boolean;
-  center?: boolean;
-};
+type Props = ThemeProps &
+  SwModalProps & {
+    fullSizeOnMobile?: boolean;
+    center?: boolean;
+  };
 
-function Component ({ center, children, className, fullSizeOnMobile, motion, width, ...props }: Props): React.ReactElement<Props> {
+function Component({ center, children, className, fullSizeOnMobile, motion, width, ...props }: Props): React.ReactElement<Props> {
   const { isWebUI } = useContext(ScreenContext);
 
   const _motion = motion || (isWebUI && !center ? 'move-right' : undefined);
@@ -37,9 +38,35 @@ function Component ({ center, children, className, fullSizeOnMobile, motion, wid
 }
 
 export const BaseModal = styled(Component)<Props>(({ theme: { token } }: Props) => {
-  return ({
+  return {
     '.ant-sw-modal-content.ant-sw-modal-content': {
-      width: '100%'
+      width: '100%',
+      borderRadius: '32px !important'
+    },
+
+    '.ant-web3-block': {
+      '& div:hover': {
+        backgroundImage: 'none !important'
+      }
+    },
+
+    '.ant-setting-item, .wallet-item, .ant-web3-block': {
+      backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
+      backgroundColor: 'transparent',
+      borderRadius: '34px !important',
+      transition: 'background-image, transform 0.3s ease',
+      ':hover': {
+        backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important',
+        borderRadius: '34px !important'
+      }
+    },
+
+    '.wallet-item': {
+      paddingRight: '0px !important'
+    },
+
+    '.ant-web3-block-right-item': {
+      marginRight: '8px'
     },
 
     '&.-desktop': {
@@ -78,5 +105,5 @@ export const BaseModal = styled(Component)<Props>(({ theme: { token } }: Props) 
         borderRadius: 0
       }
     }
-  });
+  };
 });

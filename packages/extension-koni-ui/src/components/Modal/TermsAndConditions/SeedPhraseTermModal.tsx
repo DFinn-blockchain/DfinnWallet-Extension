@@ -156,6 +156,7 @@ const Component = ({ className }: Props) => {
 export const SeedPhraseTermModal = styled(Component)<Props>(({ theme: { token } }: Props) => {
   return {
     '.ant-sw-modal-content': {
+      borderRadius: '32px',
       overflow: 'hidden',
       maxHeight: 600,
       overflowY: 'hidden'
@@ -194,7 +195,7 @@ export const SeedPhraseTermModal = styled(Component)<Props>(({ theme: { token } 
 
     '.term-box': {
       backgroundColor: token.colorBgSecondary,
-      borderRadius: token.borderRadiusLG,
+      borderRadius: '34px',
       WebkitTransition: 'background 0.2s ease-in-out',
       transition: 'background 0.2s ease-in-out',
       alignItems: 'center',
