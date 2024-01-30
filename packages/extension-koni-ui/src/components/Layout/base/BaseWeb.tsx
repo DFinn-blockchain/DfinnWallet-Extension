@@ -36,20 +36,20 @@ const StyledLayout = styled('div')<ThemeProps>(({ theme: { extendToken, token } 
       bottom: 0,
       zIndex: -1,
       transitionDuration: 'background-color 0.3s ease',
-      background: extendToken.tokensScreenInfoBackgroundColor,
+      background: '#000 !important',
 
-      '&.__background-common': {
-        background: token.colorBgDefault
-      },
-      '&.__background-info': {
-        background: extendToken.tokensScreenInfoBackgroundColor
-      },
-      '&.__background-increase': {
-        background: extendToken.tokensScreenSuccessBackgroundColor
-      },
-      '&.__background-decrease': {
-        background: extendToken.tokensScreenDangerBackgroundColor
-      }
+      // '&.__background-common': {
+      //   background: token.colorBgDefault
+      // },
+      // '&.__background-info': {
+      //   background: extendToken.tokensScreenInfoBackgroundColor
+      // },
+      // '&.__background-increase': {
+      //   background: extendToken.tokensScreenSuccessBackgroundColor
+      // },
+      // '&.__background-decrease': {
+      //   background: extendToken.tokensScreenDangerBackgroundColor
+      // }
     },
 
     '.web-layout-container': {
@@ -134,6 +134,7 @@ const StyledLayout = styled('div')<ThemeProps>(({ theme: { extendToken, token } 
         right: 'initial',
         left: 40,
         width: 'auto',
+        marginLeft: 30,
 
         '.ant-sw-sub-header-title-content': {
           fontSize: 30

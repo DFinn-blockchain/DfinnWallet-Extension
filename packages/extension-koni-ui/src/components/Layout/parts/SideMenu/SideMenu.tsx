@@ -12,6 +12,7 @@ import CN from 'classnames';
 import { ArrowCircleLeft, ArrowCircleRight, ArrowSquareUpRight, Clock, Gear, Globe, Info, MessengerLogo, Parachute, Rocket, Vault, Wallet } from 'phosphor-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import dfinnLogo from '@subwallet/extension-koni-ui/assets/dfinn-logo.png'
 
 export type Props = ThemeProps & {
   isCollapsed: boolean,
@@ -30,7 +31,7 @@ function Component ({ className,
     'Home',
     'Tokens',
     'NftCollections',
-    'Crowdloans',
+    // 'Crowdloans',
     'Staking',
     'Settings'
   ]);
@@ -42,13 +43,13 @@ function Component ({ className,
         value: '/home',
         icon: Wallet
       },
+      // {
+      //   label: t('Crowdloans'),
+      //   value: '/home/crowdloans',
+      //   icon: Rocket
+      // },
       {
-        label: t('Crowdloans'),
-        value: '/home/crowdloans',
-        icon: Rocket
-      },
-      {
-        label: t('Earning'),
+        label: t('Staking'),
         value: '/home/earning/',
         icon: Vault
       },
@@ -57,11 +58,11 @@ function Component ({ className,
         value: '/home/dapps',
         icon: Globe
       },
-      {
-        label: t('Mission Pools'),
-        value: '/home/mission-pools',
-        icon: Parachute
-      },
+      // {
+      //   label: t('Mission Pools'),
+      //   value: '/home/mission-pools',
+      //   icon: Parachute
+      // },
       {
         label: t('History'),
         value: '/home/history',
@@ -77,21 +78,21 @@ function Component ({ className,
 
   const staticMenuItems = useMemo<MenuItemType[]>(() => {
     return [
-      {
-        label: t('FAQs'),
-        value: 'faqs',
-        icon: Info
-      },
-      {
-        label: t('Contact'),
-        value: 'contact',
-        icon: MessengerLogo
-      },
-      {
-        label: t('Terms of services'),
-        value: 'tos',
-        icon: ArrowSquareUpRight
-      }
+      // {
+      //   label: t('FAQs'),
+      //   value: 'faqs',
+      //   icon: Info
+      // },
+      // {
+      //   label: t('Contact'),
+      //   value: 'contact',
+      //   icon: MessengerLogo
+      // },
+      // {
+      //   label: t('Terms of services'),
+      //   value: 'tos',
+      //   icon: ArrowSquareUpRight
+      // }
     ];
   }, [t]);
 
@@ -176,10 +177,10 @@ function Component ({ className,
     >
       <div className='__logo-container'>
         <Image
-          alt={'SubWallet'}
+          alt={'Dfinn wallet'}
           onClick={goHome}
           shape={'square'}
-          src='/images/subwallet/gradient-logo.png'
+          src={dfinnLogo}
           style={{ cursor: 'pointer' }}
         />
 

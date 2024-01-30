@@ -22,6 +22,7 @@ import { Leaf, ShareNetwork } from 'phosphor-react';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import styled, { useTheme } from 'styled-components';
+import arrowIcon from '../../../assets/arrow-icon.png'
 
 type Props = ThemeProps;
 
@@ -137,7 +138,25 @@ const CreateAccountModal = styled(Component)<Props>(({ theme: { token } }: Props
     '.items-container': {
       display: 'flex',
       flexDirection: 'column',
-      gap: token.sizeXS
+      gap: token.sizeXS,
+    
+      // '& .ant-setting-item': {
+      //   position: 'relative',
+    
+      //   '&::after': {
+      //     content: '""',
+      //     display: 'inline-block',
+      //     width: '35px',
+      //     height: '35px',
+      //     background: `url(${arrowIcon}) no-repeat`,
+      //     backgroundPosition: 'center',
+      //     borderRadius: '50%',
+      //     position: 'absolute',
+      //     right: '0',
+      //     top: '50%',
+      //     transform: 'translate(-50%, -50%)',
+      //   }
+      // },
     },
 
     '.disabled': {

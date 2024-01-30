@@ -195,7 +195,7 @@ export const SeedPhraseTermModal = styled(Component)<Props>(({ theme: { token } 
 
     '.term-box': {
       backgroundColor: token.colorBgSecondary,
-      borderRadius: '34px',
+      borderRadius: '32px',
       WebkitTransition: 'background 0.2s ease-in-out',
       transition: 'background 0.2s ease-in-out',
       alignItems: 'center',

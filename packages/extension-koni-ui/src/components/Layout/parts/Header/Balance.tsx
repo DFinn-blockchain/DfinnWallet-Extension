@@ -24,6 +24,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { useLocation, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
+import sendIcon from '@subwallet/extension-koni-ui/assets/Send.svg';
 
 export type Props = ThemeProps
 
@@ -424,6 +425,14 @@ const Balance = styled(Component)<Props>(({ theme: { token } }: Props) => ({
   marginBottom: 56,
   flexWrap: 'wrap',
 
+  '.type-buys:hover, .type-send:hover, .type-receive:hover': {
+    backgroundColor: 'transparent'
+  },
+
+  '.anticon svg': {
+    fill: '#fff0'
+  },
+
   '.ant-number .ant-typography': {
     fontSize: 'inherit !important',
     fontWeight: 'inherit !important',
@@ -444,7 +453,7 @@ const Balance = styled(Component)<Props>(({ theme: { token } }: Props) => ({
   },
 
   '.__block-divider': {
-    height: 116,
+    height: 166,
     width: 1,
     backgroundColor: token.colorBgDivider,
     marginTop: token.marginSM

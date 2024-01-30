@@ -16,6 +16,8 @@ import React, { SyntheticEvent, useCallback, useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+// import buttonBackground from '../../../assets/switch-button-checked-background.png';
+
 
 type Props = ThemeProps;
 
@@ -171,13 +173,51 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
 
 const ManageTokens = styled(Component)<Props>(({ theme: { token } }: Props) => {
   return ({
+    // '.ant-switch': {
+    //   background: '#000000',
+    //   border: '2px solid #191919',
+    //   // width: '56px',
+    //   // height: '40px'
+    // },
+
+    // '.ant-switch .ant-switch-handle': {
+    //   insetInlineStart: '5px'
+    // },
+
+    // '.ant-switch-handle': {
+    //   width: '22px',
+    //   height: '22px',
+    // },
+
+    // '.ant-switch-checked .ant-switch-handle':{
+    //   insetInlineStart: 'calc(100% - 26px)',
+    //   width: '23px',
+    //   height: '23px',
+    // },
+
+    // '.ant-switch-checked .ant-switch-handle::before': {
+    //   background: `url(${buttonBackground}) no-repeat, lightgray !important`,
+    //   backgroundSize: 'cover !important',
+    //   backgroundPosition: '50% 50%',
+    //   borderRadius: '19px',
+    // },
+
+    // '.ant-switch .ant-switch-handle::before': {
+    //   border: '1px solid #191919',
+    //   background: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
+    //   backgroundSize: 'cover',
+    //   backgroundPosition: '50% 50%',
+    //   borderRadius: '19px',
+    // },
+
     '.ant-sw-screen-layout-body': {
       display: 'flex'
     },
 
     '.ant-sw-list-wrapper.ant-sw-list-wrapper:before': {
       zIndex: 0,
-      borderRadius: token.borderRadiusLG
+      borderRadius: token.borderRadiusLG,
+      backgroundColor: '#000 !important' 
     },
 
     '.ant-sw-list-section.-boxed-mode .ant-sw-list': {
@@ -213,6 +253,13 @@ const ManageTokens = styled(Component)<Props>(({ theme: { token } }: Props) => {
 
     '.manage_tokens__right_item_container': {
       marginRight: -token.marginXXS
+    },
+
+    '.manage_tokens__right_item_container .ant-btn': {
+      background: 'transparent',
+      border: 'none',
+      outline: 'none',
+      color: '#fff !important'
     }
   });
 });

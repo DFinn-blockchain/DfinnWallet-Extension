@@ -192,36 +192,36 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         }
       ]
     },
-    {
-      key: 'community-&-support',
-      label: t('Community & support'),
-      items: [
-        {
-          key: 'twitter',
-          leftIcon: TwitterLogo,
-          leftIconBgColor: token['blue-6'],
-          rightIcon: ArrowSquareOut,
-          title: t('Twitter'),
-          onClick: openInNewTab(TWITTER_URL)
-        },
-        {
-          key: 'discord',
-          leftIcon: DiscordLogo,
-          leftIconBgColor: token['geekblue-8'],
-          rightIcon: ArrowSquareOut,
-          title: t('Discord'),
-          onClick: openInNewTab(DISCORD_URL)
-        },
-        {
-          key: 'telegram',
-          leftIcon: TelegramLogo,
-          leftIconBgColor: token['blue-5'],
-          rightIcon: ArrowSquareOut,
-          title: t('Telegram'),
-          onClick: openInNewTab(TELEGRAM_URL)
-        }
-      ]
-    },
+    // {
+    //   key: 'community-&-support',
+    //   label: t('Community & support'),
+    //   items: [
+    //     {
+    //       key: 'twitter',
+    //       leftIcon: TwitterLogo,
+    //       leftIconBgColor: token['blue-6'],
+    //       rightIcon: ArrowSquareOut,
+    //       title: t('Twitter'),
+    //       onClick: openInNewTab(TWITTER_URL)
+    //     },
+    //     {
+    //       key: 'discord',
+    //       leftIcon: DiscordLogo,
+    //       leftIconBgColor: token['geekblue-8'],
+    //       rightIcon: ArrowSquareOut,
+    //       title: t('Discord'),
+    //       onClick: openInNewTab(DISCORD_URL)
+    //     },
+    //     {
+    //       key: 'telegram',
+    //       leftIcon: TelegramLogo,
+    //       leftIconBgColor: token['blue-5'],
+    //       rightIcon: ArrowSquareOut,
+    //       title: t('Telegram'),
+    //       onClick: openInNewTab(TELEGRAM_URL)
+    //     }
+    //   ]
+    // },
     {
       key: 'about',
       label: t('About SubWallet'),
@@ -234,14 +234,14 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
           title: t('Website'),
           onClick: openInNewTab(WEBSITE_URL)
         },
-        {
-          key: 'user-manual',
-          leftIcon: Book,
-          leftIconBgColor: token['green-6'],
-          rightIcon: ArrowSquareOut,
-          title: t('User guide'),
-          onClick: openInNewTab(WIKI_URL)
-        },
+        // {
+        //   key: 'user-manual',
+        //   leftIcon: Book,
+        //   leftIconBgColor: token['green-6'],
+        //   rightIcon: ArrowSquareOut,
+        //   title: t('User guide'),
+        //   onClick: openInNewTab(WIKI_URL)
+        // },
         {
           key: 'term-of-service',
           leftIcon: BookOpen,

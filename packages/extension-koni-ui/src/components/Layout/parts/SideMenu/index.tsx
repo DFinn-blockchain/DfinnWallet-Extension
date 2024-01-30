@@ -79,7 +79,9 @@ const SideMenu = styled(Component)<Props>(({ theme: { token } }: Props) => ({
     },
 
     '.side-menu-item': {
-      width: 248
+      width: 185,
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
 

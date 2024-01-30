@@ -53,11 +53,11 @@ export const BaseModal = styled(Component)<Props>(({ theme: { token } }: Props) 
     '.ant-setting-item, .wallet-item, .ant-web3-block': {
       backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
       backgroundColor: 'transparent',
-      borderRadius: '34px !important',
+      borderRadius: '32px !important',
       transition: 'background-image, transform 0.3s ease',
       ':hover': {
-        backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important',
-        borderRadius: '34px !important'
+        // backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important',
+        borderRadius: '32px !important'
       }
     },
 

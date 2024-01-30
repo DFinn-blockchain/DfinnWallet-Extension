@@ -14,6 +14,10 @@ import styled, { createGlobalStyle, ThemeProvider as StyledComponentThemeProvide
 
 import { Theme } from '../types';
 import buttonBackground from '../assets/button-background.svg';
+import blockItemBackground from '../assets/block-item-background.svg';
+import buttonBackgroundSwitch from '../assets/switch-button-checked-background.png';
+import arrowIcon from '../assets/arrow-icon.png'
+
 
 interface Props {
   children: React.ReactNode;
@@ -41,31 +45,236 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
       fontFamily: 'inherit',
       whiteSpace: 'pre-wrap'
     },
+//
+    '.common-header': {
+      '.anticon svg': {
+        color: '#000'
+      }
+    },
+
+    '.__footer-button-content': {
+      '& .__footer-button-title, .__footer-button-subtitle': {
+        color: '#000 !important'
+      }
+    },
+
+    '.web-header.ant-sw-sub-header-container.ant-sw-header-container': {
+      gap: '20px'
+    },
+
+    '.__dapp-item': {
+
+      '& .__item-title-group, .__item-description': {
+        overflow: 'hidden !important'
+      },
+
+      '& .__star-button': {
+        minWidth: '25px !important',
+        height: '25px !important',
+        marginRight: '5px !important'
+      }
+    },
+
+    '.settings': {
+      '& .__setting-item': {
+        backgroundColor: '#141414',
+        borderRadius: '32px',
+
+        '&:hover, .ant-setting-item-content:hover': {
+          borderRadius: '32px',
+        }
+      }
+    },
+
+    '.__earning-toolbar .button-group': {
+      '& .ant-btn': {
+        color: '#000 !important',
+        borderRadius: '40px !important',
+        border: '2px solid #000',
+        outline: '3px solid #fff',
+        background: `url(${buttonBackground}) no-repeat, lightgray !important`,
+        backgroundSize: 'cover !important',
+        backgroundPosition: '50% 50% !important',
+        transition: 'transform 0.3s ease',
+      }
+    },
+
+    '.title-group': {
+      gap: '20px'
+    },
+
+    '.earning-item-content-wrapper': {
+
+      '& .earning-item-name, .earning-item-reward-sub-text, .earning-item-not-available-title': {
+        color: '#fff !important',
+      },
+
+      '& .ant-number': {
+        '& span': {
+          color: '#fff !important'
+        }
+      }
+    },
+
+    '.items-container': {
+    
+      '& .ant-setting-item': {
+        position: 'relative',
+        height: '70px',
+
+        '&::after': {
+          content: '""',
+          display: 'inline-block',
+          width: '35px',
+          height: '35px',
+          background: `url(${arrowIcon}) no-repeat`,
+          backgroundPosition: 'center',
+          borderRadius: '50%',
+          position: 'absolute',
+          right: '-7px',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+        }
+      },
+
+      '& .ant-setting-item-content': {
+        height: '70px'
+      }
+    },
+
+    '.ant-web3-block.ant-account-item.all-account-selection:hover': {
+      borderRadius: '8px !important'
+    },
+
+    '.portfolio-balance': {
+      background: `url(${blockItemBackground}) no-repeat, lightgray !important`,
+      backgroundSize: 'cover !important',
+      borderRadius: '34px !important',
+    },
+
+    '.ant-switch': {
+      background: '#000000 !important',
+      border: '2px solid #191919 !important',
+    },
+
+    '.ant-switch .ant-switch-handle': {
+      insetInlineStart: '5px !important'
+    },
+
+    '.ant-switch-handle': {
+      width: '22px !important',
+      height: '22px !important',
+    },
+
+    '.ant-switch-checked .ant-switch-handle':{
+      insetInlineStart: 'calc(100% - 26px) !important',
+      width: '23px !important',
+      height: '23px !important',
+    },
+
+    '.ant-switch-checked .ant-switch-handle::before': {
+      background: `url(${buttonBackgroundSwitch}) no-repeat, lightgray !important`,
+      backgroundSize: 'cover !important',
+      backgroundPosition: '50% 50% !important',
+      borderRadius: '19px !important',
+    },
+
+    '.ant-switch .ant-switch-handle::before': {
+      border: '1px solid #191919 !important',
+      background: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
+      backgroundSize: 'cover !important',
+      backgroundPosition: '50% 50% !important',
+      borderRadius: '19px !important',
+    },
+
+    '.portfolio-balance .__block-item': {
+      padding: '30px',
+
+      '& span': {
+        color: '#000 !important'
+      },
+
+      '& button': {
+        background: 'transparent',
+        outline: 'none !important'
+      }
+    },
+
+    '.web-layout-sidebar .-expanded, .web-layout-sidebar .-collapsed': {
+      background: 'rgba(21, 22, 23, 0.40) !important'
+    },
+
+    
+    '.side-menu .side-menu-item:hover': {
+      backgroundColor: 'inherit'
+    },
+
+    '.side-menu .side-menu-item': {
+      transition: 'transform 0.3s ease',
+
+        '& .__icon, .__label': {
+          color: '#fff !important'
+        },
+    },
+
+    '.side-menu .-activated': {
+      transition: 'transform 0.3s ease',
+      background: 'linear-gradient(white,white) padding-box,linear-gradient(19deg, rgb(48 205 100), rgb(178, 217, 190), rgb(58, 140, 74)) border-box',
+      borderRadius: '50em',
+      border: '4px solid transparent',
+
+      '& .__icon, .__label': {
+        color: '#000 !important'
+      }
+    },
+
+    
+
+    '.web-layout-header-simple': {
+
+      '& .__logo': {
+      borderRadius: '10px',
+      }
+    },
+
+    '.logo-container .ant-image': {
+      borderRadius: '10px',
+      boxShadow: '0px 0px 20px 7px rgba(255, 255, 255, 0.5)'
+    },
+
+    '.button-group .ant-btn': {
+      backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important',
+
+        '& svg': {
+          fill: 'rgb(37,149,230)',
+        }
+    },
+
+    '.ant-background-icon': {
+      borderRadius: '10px !important'
+    },
+
+    '.ant-sw-modal-body .wallet-item, .ant-sw-modal-body .ant-web3-block, .ant-sw-modal-body .ant-setting-item': {
+      border: '1.8px solid #191919',
+      background: 'rgba(0, 0, 0, 0.50) !important',
+      backgroundImage: 'none !important',
+
+      '& :hover': {
+        backgroundImage: 'none !important',
+
+      }
+    },
 
     '.ant-sw-list .ant-web3-block': {
-      borderRadius: '32px',
-      backgroundImage: 'var(--Holo-primary1,     conic-gradient(        from 180deg at 50% 50%,         rgba(192, 192, 192, 0.78) 16.875deg,         rgba(173, 216, 230, 0.78) 55deg,         rgba(192, 192, 192, 0.78) 88.12500178813934deg,         rgba(255, 182, 193, 0.78) 225deg,         rgba(173, 216, 230, 0.78) 288.7499928474426deg,         rgba(221, 160, 221, 0.78) 360deg    ),     conic-gradient(        from 180deg at 50% 50%,         #FFF 30.00000089406967deg,         #000 95.625deg,         #FFF 168.75deg,         #000 228.75000715255737deg,         #FFF 285.0000071525574deg,         #000 360deg    ),     radial-gradient(        116.62% 141.42% at 0% 0%,         #000 7.61%,         #C0C0C0 57.81%,         #000 100%    ))',
       transition: 'transform 0.3s ease',
     },
 
-    '.side-menu-item': {
-      border: '1px solid #212121 !important',
-      background: '#141414 !important',
-      transition: 'background'
+    '.ant-table.ant-table-content table.ant-table-row.ant-table-cell': {
+      backgroundColor: '#000'
     },
 
-    '.ant-btn.__sidebar-collapse-trigger': {
+    '.ant-btn.__sidebar-collapse-trigger, .action-group span': {
       color: '#fff !important'
-    },
-
-    'tr td:first-child': {
-      borderTopLeftRadius: '32px !important',
-      borderBottomLeftRadius: '32px !important'
-    },
-    
-    'tr td:last-child': {
-      borderTopRightRadius: '32px !important',
-      borderBottomRightRadius: '32px !important'
     },
 
     '.welcome-import-button-title, .earning-item-reward *, .welcome-import-button-content *, .earning-item-name, .earning-item-reward, .button-group *': {
@@ -74,6 +283,12 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
 
     '.ant-sw-modal-title, .ant-sw-screen-layout-body, .web-layout-content, .ant-sw-screen-layout-container, .web-layout-content *': {
       overflow: 'visible !important'
+    },
+
+    '.ant-web3-block-right-item .ant-btn.ant-btn-ghost:hover': {
+      background: `url(${buttonBackground}) no-repeat, lightgray !important`,
+      backgroundSize: 'cover !important',
+      backgroundPosition: '50% 50% !important',
     },
 
     '.ant-btn, .setting-item': {
@@ -95,11 +310,11 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
       }
     },
 
-    '.ant-btn:hover, .setting-item:hover, .ant-sw-list .ant-web3-block:hover': {
+    '.ant-btn:hover, .setting-item:hover, .ant-sw-list .ant-setting-item:hover, .items-container .ant-setting-item:hover, .side-menu .side-menu-item:hover': {
       transform: 'translate(0, -3px)'
     },
 
-    '.ant-btn:active, button:disabled': {
+    '.ant-btn:active, button:disabled, .ant-setting-item:active, .side-menu .side-menu-item:active': {
       filter: 'brightness(0.5)'
     },
 
@@ -110,17 +325,16 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
     '.ant-input-container, .-shape-default:before, .ant-select-modal-item .ant-setting-item, .phrase-number-selector-input, .social-button, .type-warning, .term-box': {
       backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%) !important',
       backgroundColor: 'transparent !important',
-      borderRadius: '34px !important',
+      borderRadius: '32px !important',
       transition: 'background-image, transform 0.3s ease'
     },
 
-    '.ant-select-modal-item .ant-web3-block:hover': {
-      borderRadius: '34px !important',
-      backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #3d3d3d 0%, #111 100%) !important'
+    '.ant-select-modal-item .ant-web3-block:hover, .ant-network-item, ant-network-item:hover, .ant-select-modal-item .ant-account-item': {
+      borderRadius: '32px !important',
     },
 
     '.ant-input-container:hover, wallet-item:hover, .ant-select-modal-input-container:hover::before': {
-      borderRadius: '34px !important'
+      borderRadius: '32px !important'
     },
 
     '.ant-squircle': {
@@ -130,6 +344,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
     '.social-button svg': {
         fill: 'rgb(37, 149, 230)'
     },
+//
 
     '.loading-icon': {
       fontSize: token.size

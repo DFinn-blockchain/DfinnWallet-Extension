@@ -368,7 +368,7 @@ const ImportSeedPhrase = styled(Component)<Props>(({ theme: { token } }: Props) 
         '& > div:nth-child(1), & > div:nth-child(2)': {
           backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%)',
           backgroundColor: 'transparent',
-          borderRadius: '34px',
+          borderRadius: '32px',
           transition: 'background-image, transform 0.3s ease'
         }
       }

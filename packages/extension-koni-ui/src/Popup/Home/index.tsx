@@ -55,11 +55,11 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
     }
   }, [navigate, pathname]);
 
-  useEffect(() => {
-    if (isConfirmedTermGeneral.includes('nonConfirmed')) {
-      activeModal(GENERAL_TERM_AND_CONDITION_MODAL);
-    }
-  }, [activeModal, isConfirmedTermGeneral, setIsConfirmedTermGeneral]);
+  // useEffect(() => {
+  //   if (isConfirmedTermGeneral.includes('nonConfirmed')) {
+  //     activeModal(GENERAL_TERM_AND_CONDITION_MODAL);
+  //   }
+  // }, [activeModal, isConfirmedTermGeneral, setIsConfirmedTermGeneral]);
 
   return (
     <>

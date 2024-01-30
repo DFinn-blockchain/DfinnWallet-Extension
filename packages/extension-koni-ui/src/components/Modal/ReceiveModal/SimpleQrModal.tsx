@@ -13,6 +13,7 @@ import { CopySimple } from 'phosphor-react';
 import React, { useCallback } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import styled from 'styled-components';
+import logo from '../../../assets/dfinn-logo.png'
 
 import { isEthereumAddress } from '@polkadot/util-crypto';
 
@@ -44,6 +45,7 @@ const Component: React.FC<Props> = ({ address, className, id: modalId, onBack }:
         <SwQRCode
           color='#000'
           errorLevel='H'
+          icon={logo}
           logoPadding={isEvmAddress ? 6 : 7 }
           size={264}
           value={address || ''}

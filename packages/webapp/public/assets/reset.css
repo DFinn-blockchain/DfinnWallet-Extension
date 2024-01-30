@@ -549,7 +549,7 @@ div#popup-container {
 .ant-table .ant-table-content table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px;
+    /* border-spacing: 0 8px; */
     table-layout: fixed;
 }
 
@@ -577,30 +577,42 @@ div#popup-container {
     content: none !important;
 }
 
-.ant-table .ant-table-content table .ant-table-row {
-    border-radius: 8px;
+.ant-table-cell-row-hover {
+    background: transparent !important;
+    border-top: 2px solid #1a1a1a !important;
+    border-radius: 0px !important;
 }
 
+.ant-table .ant-table-content table .ant-table-row:first-child .ant-table-cell {
+    border-top: none;
+}
+
+.ant-table .ant-table-content table .ant-table-row:hover {
+    background-color: #1a1a1a;
+    border-radius: 0px !important;
+}
+table td {
+    border-radius: unset !important;
+}
 .ant-table .ant-table-content table .ant-table-row .ant-table-cell {
-    border-top: none !important;
-    border-bottom: none !important;
+    border-top: 2px solid #1a1a1a !important;
     padding: 12px 0;
-    background: #1a1a1a;
+    background: #000;
     margin: 8px 0;
     text-align: end;
     width: 25%;
 }
 
 .ant-table .ant-table-content table .ant-table-row .ant-table-cell:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    /* border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px; */
     text-align: start;
     padding-left: 13px;
 }
 
 .ant-table .ant-table-content table .ant-table-row .ant-table-cell:last-child {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    /* border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px; */
     padding-right: 16px;
 }
 
@@ -617,7 +629,7 @@ div#popup-container {
 
 .ant-sw-modal .ant-sw-modal-header.ant-sw-modal-header {
     background-color: transparent;
-    border-bottom-color: #1a1a1a;
+    border-bottom-color: transparent;
 }
 
 .ant-sw-modal .ant-sw-modal-content.ant-sw-modal-content {

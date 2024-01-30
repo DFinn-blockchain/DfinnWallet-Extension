@@ -26,6 +26,7 @@ import { ScreenContext } from '../contexts/ScreenContext';
 import useGetDefaultAccountName from '../hooks/account/useGetDefaultAccountName';
 import usePreloadView from '../hooks/router/usePreloadView';
 import { convertFieldToObject, isMobile, readOnlyScan, simpleCheckForm } from '../utils';
+import dfinnLogo from '../assets/dfinn-logo.png'
 
 type Props = ThemeProps;
 
@@ -183,12 +184,13 @@ function Component ({ className }: Props): React.ReactElement<Props> {
   const onClickToSelectTypeConnect = useCallback((idModal: string) => {
     return () => {
       setModalIdAfterConfirm(idModal);
-
-      if (_isConfirmedTermGeneral.includes('nonConfirmed')) {
-        activeModal(GENERAL_TERM_AND_CONDITION_MODAL);
-      } else {
-        openModal(idModal)();
-      }
+      // 
+      // if (_isConfirmedTermGeneral.includes('nonConfirmed')) {
+      //   activeModal(GENERAL_TERM_AND_CONDITION_MODAL);
+      // } else {
+      //   openModal(idModal)();
+      // }
+      openModal(idModal)();
     };
   }, [_isConfirmedTermGeneral, activeModal, openModal]);
 
@@ -266,20 +268,20 @@ function Component ({ className }: Props): React.ReactElement<Props> {
               isWebUI
                 ? (
                   <Image
-                    src='/images/subwallet/gradient-logo.png'
+                    src={dfinnLogo}
                     width={80}
                   />
                 )
                 : (
                   <Image
-                    src={'./images/subwallet/welcome-logo.png'}
+                    src={dfinnLogo}
                     width={139}
                   />
                 )
             }
           </div>
           {
-            isWebUI && (<div className='title'>{t('Welcome to SubWallet!')}</div>)
+            isWebUI && (<div className='title'>{t('Welcome to Dfinn wallet!')}</div>)
           }
           <div className='sub-title'>
             {t('Choose how you\'d like to set up your wallet')}
