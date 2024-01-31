@@ -20,6 +20,7 @@ import { CaretLeft, CopySimple, GlobeHemisphereWest } from 'phosphor-react';
 import React, { useCallback, useContext, useMemo } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import styled from 'styled-components';
+import logo from '../../../assets/dfinn-logo.png'
 
 interface Props extends ThemeProps {
   address?: string;
@@ -103,6 +104,7 @@ const Component: React.FC<Props> = ({ address, className, selectedNetwork }: Pro
             logoPadding={isEvmChain ? 6 : 7 }
             size={264}
             value={formattedAddress}
+            icon={logo}
           />
         </div>
 

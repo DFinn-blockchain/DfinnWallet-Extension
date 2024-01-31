@@ -8,6 +8,7 @@ import { SwQRCode } from '@subwallet/react-ui';
 import CN from 'classnames';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import logo from '../../../assets/dfinn-logo.png'
 
 interface Props extends ThemeProps {
   size?: string | number;
@@ -44,7 +45,7 @@ const Component = ({ className,
               className={CN({ hidden: dataIndex !== _index })}
               color='#000'
               errorLevel='Q'
-              icon=''
+              icon={logo}
               ignoreEncode={true}
               key={_index}
               size={264}

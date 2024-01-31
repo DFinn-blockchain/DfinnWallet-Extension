@@ -25,6 +25,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import logo from '../../assets/dfinn-logo.png'
 
 import { isEthereumAddress } from '@polkadot/util-crypto';
 
@@ -489,6 +490,7 @@ const Component: React.FC<Props> = (props: Props) => {
                           logoPadding={!isEthereumAddress(account.address) ? 4 : 3}
                           size={264}
                           value={qrData}
+                          icon={logo}
                         />
                       </div>
                     </div>
