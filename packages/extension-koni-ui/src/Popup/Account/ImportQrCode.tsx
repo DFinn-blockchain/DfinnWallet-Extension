@@ -171,7 +171,7 @@ const Component: React.FC<Props> = (props: Props) => {
                 <Image
                   height={56}
                   shape='squircle'
-                  src={DefaultLogosMap.subwallet}
+                  src={DefaultLogosMap.dfinn}
                   width={56}
                 />
               )}

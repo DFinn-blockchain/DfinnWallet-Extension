@@ -11,7 +11,7 @@ export const PREDEFINED_WALLETS: Record<string, WalletInfo> = {
   SubWallet: {
     description: '',
     evmKey: 'SubWallet',
-    icon: DefaultLogosMap.subwallet_gradient,
+    icon: DefaultLogosMap.dfinn,
     mcicon: DefaultLogosMap.subwallet_mc,
     key: 'SubWallet',
     name: 'SubWallet',

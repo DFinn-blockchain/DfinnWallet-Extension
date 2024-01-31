@@ -9,6 +9,8 @@ import CN from 'classnames';
 import { DiscordLogo, PaperPlaneTilt, TwitterLogo } from 'phosphor-react';
 import React from 'react';
 import styled from 'styled-components';
+import buttonBackground from '../assets/button-background.svg';
+
 
 type Props = ThemeProps;
 
@@ -50,7 +52,7 @@ const Component: React.FC<Props> = (props: Props) => {
       {
         items.map((item) => (
           <Button
-            className={CN(`type-${item.type}`)}
+            className={CN(`type-${item.type}, soc-button`)}
             icon={(
               <Icon
                 phosphorIcon={item.icon}
@@ -74,7 +76,17 @@ const SocialButtonGroup = styled(Component)<Props>(({ theme: { token } }: Props)
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: token.size
+      gap: token.size,
+
+      '& .soc-button': {
+        background: `url(${buttonBackground}) no-repeat, lightgray !important`,
+        backgroundSize: 'cover !important',
+        backgroundPosition: '50% 50% !important',
+
+        '& svg': {
+          fill: '#000'
+        }
+      }
     },
 
     [`.type-${SocialType.TWITTER}`]: {

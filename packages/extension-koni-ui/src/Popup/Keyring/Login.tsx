@@ -86,7 +86,7 @@ const Component: React.FC<Props> = ({ className }: Props) => {
         <div className='body-container'>
           <div className='logo-container'>
             <Image
-              src='/images/subwallet/gradient-logo.png'
+              src='/images/projects/dfinn-logo.png'
               width={80}
             />
           </div>

@@ -46,6 +46,14 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
       whiteSpace: 'pre-wrap'
     },
 //
+    '.__select-account-type .ant-web3-block-right-item': {
+      display: 'none'
+    },
+
+    '.ant-setting-item-name': {
+      color: '#fff !important'
+    },
+
     '.common-header': {
       '.anticon svg': {
         color: '#000'
@@ -322,7 +330,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
       transform: 'none !important'
     },
 
-    '.ant-input-container, .-shape-default:before, .ant-select-modal-item .ant-setting-item, .phrase-number-selector-input, .social-button, .type-warning, .term-box': {
+    '.ant-input-container, .-shape-default:before, .ant-select-modal-item .ant-setting-item, .phrase-number-selector-input, .type-warning, .term-box': {
       backgroundImage: 'radial-gradient(113.12% 113.12% at 50.52% 50.52%, #292929 0%, #000 100%) !important',
       backgroundColor: 'transparent !important',
       borderRadius: '32px !important',
@@ -342,7 +350,7 @@ const GlobalStyle = createGlobalStyle<ThemeProps>(({ theme }) => {
     },
 
     '.social-button svg': {
-        fill: 'rgb(37, 149, 230)'
+        fill: '#000'
     },
 //
 

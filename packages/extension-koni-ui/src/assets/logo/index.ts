@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 export const DefaultLogosMap: Record<string, string> = {
-  subwallet: '/images/projects/subwallet.png',
+  dfinn: '/images/projects/dfinn-logo.png',
   parity: '/images/projects/parity.png',
   keystone: '/images/projects/keystone.png',
   ledger: '/images/projects/ledger.png',
