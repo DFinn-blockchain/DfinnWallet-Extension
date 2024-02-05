@@ -4,8 +4,9 @@
 import { useSelector, useTranslation } from '@subwallet/extension-koni-ui/hooks';
 import { reloadCron, saveShowBalance } from '@subwallet/extension-koni-ui/messaging';
 import { ThemeProps } from '@subwallet/extension-koni-ui/types';
-import { Button, Icon, Number, SwNumberProps, Tag } from '@subwallet/react-ui';
-import { ArrowsClockwise, CopySimple, Eye, EyeSlash, PaperPlaneTilt, ShoppingCartSimple } from 'phosphor-react';
+import { Button, Icon, Number, SwNumberProps, Tag, Typography } from '@subwallet/react-ui';
+import CN from 'classnames';
+import { ArrowDown, ArrowUpRight, Eye, EyeSlash, PaperPlaneTilt, PlusCircle, ShoppingCartSimple } from 'phosphor-react';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
@@ -59,6 +60,7 @@ function Component (
             decimal={0}
             decimalOpacity={0.45}
             hide={!isShowBalance}
+            intColor='black'
             prefix='$'
             size={38}
             subFloatNumber
@@ -68,23 +70,20 @@ function Component (
       </div>
       {!isShrink && (
         <div className={'__balance-change-container'}>
-          <Button
-            className='button-change-show-balance'
-            icon={(
-              <Icon
-                phosphorIcon={ !isShowBalance ? Eye : EyeSlash}
-              />
-            )}
-            onClick={onChangeShowBalance}
-            size='xs'
-            tooltip={isShowBalance ? t('Hide balance') : t('Show balance')}
-            type='ghost'
-          />
+          <div onClick={onChangeShowBalance}>
+            <Icon
+              phosphorIcon={ !isShowBalance ? Eye : EyeSlash}
+              iconColor='black'
+              size='l'
+            />
+          </div>
           <Number
             className={'__balance-change-value'}
             decimal={0}
+            decimalColor='black'
             decimalOpacity={1}
             hide={!isShowBalance}
+            intColor='black'
             prefix={isPriceDecrease ? '- $' : '+ $'}
             value={totalChangeValue}
           />
@@ -101,63 +100,61 @@ function Component (
               weight={700}
             />
           </Tag>
-          <Button
-            className='button-change-show-balance'
-            icon={(
-              <Icon
-                phosphorIcon={ ArrowsClockwise }
-              />
-            )}
-            loading={reloading}
-            onClick={reloadBalance}
-            size='xs'
-            tooltip={t('Refresh balance')}
-            type='ghost'
-          />
         </div>
       )}
-      <div className={'__action-button-container'}>
-        <Button
-          icon={(
-            <Icon
-              phosphorIcon={CopySimple}
-              size={isShrink ? 'sm' : 'md' }
-              weight={'duotone'}
+      <div className={CN('__block-item')}>
+        <div className={'__action-button-container'}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Button
+              icon={(
+                <Icon
+                  phosphorIcon={ArrowDown}
+                  size={isShrink ? 'sm' : 'md' }
+                  weight={'duotone'}
+                />
+              )}
+              onClick={onOpenReceive}
+              shape='squircle'
+              size={isShrink ? 'xs' : 'md'}
+              tooltip={t('Get address')}
             />
-          )}
-          onClick={onOpenReceive}
-          shape='squircle'
-          size={isShrink ? 'xs' : 'sm'}
-          tooltip={t('Get address')}
-        />
-        <div className={'__button-space'} />
-        <Button
-          icon={(
-            <Icon
-              phosphorIcon={PaperPlaneTilt}
-              size={isShrink ? 'sm' : 'md' }
-              weight={'duotone'}
+            <Typography.Text>{'Receive'}</Typography.Text>
+          </div>
+          <div className={'__button-space'} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Button
+              icon={(
+                <Icon
+                  phosphorIcon={ArrowUpRight}
+                  size={isShrink ? 'sm' : 'md' }
+                  weight={'duotone'}
+                />
+              )}
+              onClick={onOpenSendFund}
+              shape='squircle'
+              size={isShrink ? 'xs' : 'md'}
+              tooltip={t('Send tokens')}
             />
-          )}
-          onClick={onOpenSendFund}
-          shape='squircle'
-          size={isShrink ? 'xs' : 'sm'}
-          tooltip={t('Send tokens')}
-        />
-        <div className={'__button-space'} />
-        <Button
-          icon={
-            <Icon
-              phosphorIcon={ShoppingCartSimple}
-              size={isShrink ? 'sm' : 'md' }
-              weight={'duotone'}
+            <Typography.Text>{'Send'}</Typography.Text>
+          </div>
+          <div className={'__button-space'} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Button
+              icon={
+                <Icon
+                  phosphorIcon={PlusCircle}
+                  size={isShrink ? 'sm' : 'md' }
+                  weight={'duotone'}
+                />
+              }
+              onClick={onOpenBuyTokens}
+              shape='squircle'
+              size={isShrink ? 'xs' : 'md'}
+              tooltip={t('Buy token')}
             />
-          }
-          onClick={onOpenBuyTokens}
-          shape='squircle'
-          size={isShrink ? 'xs' : 'sm'}
-          tooltip={t('Buy token')}
-        />
+            <Typography.Text>{'Buy'}</Typography.Text>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -168,6 +165,10 @@ export const UpperBlock = styled(Component)<Props>(({ theme: { token } }: Props)
     padding: '0px 8px 24px 8px',
     display: 'flex',
     flexDirection: 'column',
+
+    '.anticon svg': {
+      fill: '#fff0'
+    },
 
     '.__total-balance-value': {
       textAlign: 'center',
@@ -183,6 +184,7 @@ export const UpperBlock = styled(Component)<Props>(({ theme: { token } }: Props)
     },
 
     '.ant-btn': {
+      color: 'transparent',
       transition: 'width, height, padding 0s'
     },
 
@@ -225,6 +227,20 @@ export const UpperBlock = styled(Component)<Props>(({ theme: { token } }: Props)
 
       '.ant-number': {
         fontSize: token.fontSizeXS
+      }
+    },
+ 
+    '.__block-item': {
+      gap: token.sizeSM,
+      '& span': {
+        color: '#000 !important'
+      },
+      '& button': {
+        background: 'transparent',
+        outline: 'none !important'
+      },
+      '& button:hover': {
+        background: 'transparent'
       }
     },
 

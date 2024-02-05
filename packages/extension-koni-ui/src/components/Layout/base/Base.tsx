@@ -49,7 +49,7 @@ const Component = ({ children, className, footer, headerIcons, isSetTitleContext
         phosphorIcon: Wallet,
         weight: 'fill'
       },
-      label: t('Tokens'),
+      label: t('Wallet'),
       key: 'tokens',
       url: '/home/tokens'
     },
@@ -66,20 +66,10 @@ const Component = ({ children, className, footer, headerIcons, isSetTitleContext
     {
       icon: {
         type: 'phosphor',
-        phosphorIcon: Rocket,
-        weight: 'fill'
-      },
-      label: t('Crowdloans'),
-      key: 'crowdloans',
-      url: '/home/crowdloans'
-    },
-    {
-      icon: {
-        type: 'phosphor',
         phosphorIcon: Vault,
         weight: 'fill'
       },
-      label: t('Earning'),
+      label: t('Staking'),
       key: 'earning',
       url: '/home/earning'
     },
@@ -92,26 +82,6 @@ const Component = ({ children, className, footer, headerIcons, isSetTitleContext
       label: t('DApps'),
       key: 'dapps',
       url: '/home/dapps'
-    },
-    {
-      icon: {
-        type: 'phosphor',
-        phosphorIcon: Parachute,
-        weight: 'fill'
-      },
-      label: t('Mission Pools'),
-      key: 'mission-pools',
-      url: '/home/mission-pools'
-    },
-    {
-      icon: {
-        type: 'phosphor',
-        phosphorIcon: Clock,
-        weight: 'fill'
-      },
-      label: t('History'),
-      key: 'history',
-      url: '/home/history'
     }
   ]), [t]);
 
@@ -177,6 +147,10 @@ const Base = styled(Component)<LayoutBaseProps>(({ theme: { token } }: LayoutBas
   '.ant-sw-tab-bar-container': {
     'white-space': 'nowrap',
     overflowX: 'auto',
+    position: 'fixed',
+    left: 0,
+    bottom: 0,
+    width: '100%',
 
     padding: `${token.paddingXS}px ${token.paddingSM}px ${token.paddingSM}px`,
     alignItems: 'flex-start',
@@ -212,11 +186,11 @@ const Base = styled(Component)<LayoutBaseProps>(({ theme: { token } }: LayoutBas
     '.ant-sw-tab-bar-item': {
       paddingBottom: token.sizeXS,
       paddingTop: token.sizeXS
-    },
-
-    '.ant-sw-tab-bar-item-label': {
-      display: 'none'
     }
+
+    // '.ant-sw-tab-bar-item-label': {
+    //   display: 'none'
+    // }
   }
 }));
 

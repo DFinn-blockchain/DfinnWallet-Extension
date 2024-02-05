@@ -14,7 +14,7 @@ import { windowOpen } from '@subwallet/extension-koni-ui/messaging';
 import { Theme, ThemeProps } from '@subwallet/extension-koni-ui/types';
 import { openInNewTab } from '@subwallet/extension-koni-ui/utils';
 import { BackgroundIcon, Button, ButtonProps, Icon, SettingItem, SwHeader, SwIconProps } from '@subwallet/react-ui';
-import { ArrowsOut, ArrowSquareOut, Book, BookBookmark, BookOpen, CaretRight, Coin, DiscordLogo, FrameCorners, GlobeHemisphereEast, Lock, ShareNetwork, ShieldCheck, TelegramLogo, TwitterLogo, X } from 'phosphor-react';
+import { ArrowRight ,ArrowsOut, ArrowSquareOut,User, Wallet, BookBookmark, BookOpen, CaretRight, Coin, DiscordLogo, FileX, FrameCorners, GlobeHemisphereEast, Lock, ShareNetwork, ShieldCheck, TelegramLogo, TwitterLogo, X } from 'phosphor-react';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled, { useTheme } from 'styled-components';
@@ -49,9 +49,8 @@ function generateLeftIcon (backgroundColor: string, icon: SwIconProps['phosphorI
       backgroundColor={backgroundColor}
       customIcon={isNode ? icon : undefined}
       phosphorIcon={isNode ? undefined : icon}
-      size='sm'
+      size='lg'
       type={isNode ? 'customIcon' : 'phosphor'}
-      weight='fill'
     />
   );
 }
@@ -120,10 +119,10 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         },
         {
           key: 'general-settings',
-          leftIcon: GlobeHemisphereEast,
-          leftIconBgColor: token['magenta-6'],
-          rightIcon: CaretRight,
-          title: t('General settings'),
+          leftIcon: User,
+          leftIconBgColor: '#fedafa',
+          rightIcon: ArrowRight,
+          title: t('Accounts'),
           onClick: () => {
             navigate('/settings/general');
           }
@@ -131,9 +130,9 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'security-settings',
           leftIcon: ShieldCheck,
-          leftIconBgColor: token['green-6'],
-          rightIcon: CaretRight,
-          title: t('Security settings'),
+          leftIconBgColor: '#d1defe',
+          rightIcon: ArrowRight,
+          title: t('Security'),
           onClick: () => {
             navigate('/settings/security', { state: true });
           }
@@ -141,23 +140,18 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'manage-address-book',
           leftIcon: BookBookmark,
-          leftIconBgColor: token['blue-6'],
-          rightIcon: CaretRight,
-          title: t('Manage address book'),
+          leftIconBgColor: '#fedafa',
+          rightIcon: ArrowRight,
+          title: t('Manage Address Book'),
           onClick: () => {
             navigate('/settings/address-book');
           }
         },
         {
           key: 'wallet-connect',
-          leftIcon: (
-            <WalletConnect
-              height='1em'
-              width='1em'
-            />
-          ),
-          leftIconBgColor: token['geekblue-6'],
-          rightIcon: CaretRight,
+          leftIcon: Wallet,
+          leftIconBgColor: '#fedafa',
+          rightIcon: ArrowRight,
           title: t('WalletConnect'),
           onClick: () => {
             navigate('/wallet-connect/list');
@@ -173,9 +167,9 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'manage-networks',
           leftIcon: ShareNetwork,
-          leftIconBgColor: token['purple-7'],
-          rightIcon: CaretRight,
-          title: t('Manage networks'),
+          leftIconBgColor: '#fedafa',
+          rightIcon: ArrowRight,
+          title: t('Networks'),
           onClick: () => {
             navigate('/settings/chains/manage');
           }
@@ -183,8 +177,8 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'manage-tokens',
           leftIcon: Coin,
-          leftIconBgColor: token['gold-6'],
-          rightIcon: CaretRight,
+          leftIconBgColor: '#fedafa',
+          rightIcon: ArrowRight,
           title: t('Manage tokens'),
           onClick: () => {
             navigate('/settings/tokens/manage');
@@ -229,7 +223,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'website',
           leftIcon: ShieldCheck,
-          leftIconBgColor: token['red-6'],
+          leftIconBgColor: '#fedafa',
           rightIcon: ArrowSquareOut,
           title: t('Website'),
           onClick: openInNewTab(WEBSITE_URL)
@@ -245,7 +239,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'term-of-service',
           leftIcon: BookOpen,
-          leftIconBgColor: token['volcano-7'],
+          leftIconBgColor: '#fedafa',
           rightIcon: ArrowSquareOut,
           title: t('Terms of service'),
           onClick: openInNewTab(TERMS_OF_SERVICE_URL)
@@ -253,7 +247,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
         {
           key: 'privacy-policy',
           leftIcon: BookBookmark,
-          leftIconBgColor: token['geekblue-6'],
+          leftIconBgColor: '#fedafa',
           rightIcon: ArrowSquareOut,
           title: t('Privacy policy'),
           onClick: openInNewTab(PRIVACY_AND_POLICY_URL)
@@ -271,6 +265,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
             phosphorIcon={X}
             type='phosphor'
             weight={'bold'}
+            iconColor={'white'}
           />
         ),
         onClick: goHome
@@ -289,6 +284,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
       <>
         {!isWebUI && (
           <SwHeader
+            className='__header-icons'
             left='logo'
             onClickLeft={goHome}
             paddingVertical
@@ -362,6 +358,13 @@ export const Settings = styled(Component)<Props>(({ theme: { extendToken, token 
     display: 'flex',
     flexDirection: 'column',
 
+    '.__header-icons': {
+      '& button': {
+        background: 'transparent',
+        outline: 'none !important'
+      }
+    },
+
     '.ant-sw-header-container': {
       backgroundColor: token.colorBgDefault,
       minHeight: 'auto',
@@ -424,6 +427,22 @@ export const Settings = styled(Component)<Props>(({ theme: { extendToken, token 
       alignItems: 'center',
       marginRight: -token.marginXS,
       color: token['gray-4']
+    },
+
+    '@media (max-width: 991px)': {
+      '.__setting-item': {
+        backgroundColor: '#252525',
+        padding: '5px'
+      },
+      '.__setting-item:hover': {
+        backgroundColor: '#252525'
+      },
+      '.__setting-item .ant-web3-block-right-item': {
+        color: token['colorWhite'],
+        backgroundColor: 'black',
+        borderRadius: 50,
+        marginRight: 5
+      },
     },
 
     '.__setting-item:hover .ant-web3-block-right-item': {

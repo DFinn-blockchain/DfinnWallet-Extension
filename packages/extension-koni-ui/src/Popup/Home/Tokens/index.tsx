@@ -30,7 +30,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
-
+import radial_bg1 from '../../../assets/radial_bg1.png'
 import DetailTable from './DetailTable';
 
 type Props = ThemeProps;
@@ -521,7 +521,10 @@ const Tokens = styled(WrapperComponent)<WrapperProps>(({ theme: { extendToken, t
       width: '100%',
       display: 'flex',
       alignItems: 'center',
-      backgroundImage: extendToken.tokensScreenSuccessBackgroundColor,
+      borderTopLeftRadius: 70,
+      borderTopRightRadius: 70,
+      background: `url(${radial_bg1}) no-repeat`,
+      backgroundSize: 'cover',
       transition: 'opacity, padding-top 0.27s ease',
 
       '&.-is-shrink': {

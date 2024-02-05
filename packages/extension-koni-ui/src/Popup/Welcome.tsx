@@ -10,9 +10,9 @@ import { createAccountExternalV2 } from '@subwallet/extension-koni-ui/messaging'
 import { RootState } from '@subwallet/extension-koni-ui/stores';
 import { PhosphorIcon, ThemeProps } from '@subwallet/extension-koni-ui/types';
 import { checkHasInjected } from '@subwallet/extension-koni-ui/utils/wallet';
-import { Button, ButtonProps, Form, Icon, Image, Input, ModalContext } from '@subwallet/react-ui';
+import { BackgroundIcon,Button, ButtonProps, Form, Icon, Image, Input, ModalContext, SettingItem, SwIconProps } from '@subwallet/react-ui';
 import CN from 'classnames';
-import { FileArrowDown, PlusCircle, PuzzlePiece, Swatches, Wallet } from 'phosphor-react';
+import { ArrowRight, FileArrowDown, PlusCircle, PuzzlePiece, Swatches, Wallet } from 'phosphor-react';
 import { Callbacks, FieldData, RuleObject } from 'rc-field-form/lib/interface';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -27,6 +27,7 @@ import useGetDefaultAccountName from '../hooks/account/useGetDefaultAccountName'
 import usePreloadView from '../hooks/router/usePreloadView';
 import { convertFieldToObject, isMobile, readOnlyScan, simpleCheckForm } from '../utils';
 import dfinnLogo from '../assets/dfinn-logo.png'
+import WelcomeSvg from '../assets/new_splash_img.svg'
 
 type Props = ThemeProps;
 
@@ -228,6 +229,35 @@ function Component ({ className }: Props): React.ReactElement<Props> {
     setIsConfirmedTermGeneral('confirmed');
   }, [reformatAttachAddress, setIsConfirmedTermGeneral, autoGenAttachReadonlyAccountName, isAttachAddressEthereum, form, navigate]);
 
+  const isReactNode = (element: unknown): element is React.ReactNode => {
+    return React.isValidElement(element);
+  };
+
+  function generateLeftIcon (icon: SwIconProps['phosphorIcon'] | React.ReactNode): React.ReactNode {
+    const isNode = isReactNode(icon);
+
+    return (
+      <BackgroundIcon
+        backgroundColor={'#c0d3fd'}
+        customIcon={isNode ? icon : undefined}
+        phosphorIcon={isNode ? undefined : icon}
+        size='lg'
+        type={isNode ? 'customIcon' : 'phosphor'}
+      />
+    );
+  }
+
+  function generateRightIcon (icon: SwIconProps['phosphorIcon']): React.ReactNode {
+    return (
+      <Icon
+        className='__right-icon'
+        customSize={'20px'}
+        phosphorIcon={icon}
+        type='phosphor'
+      />
+    );
+  }
+
   const onSubmitAttachReadonlyAccount = useCallback(() => {
 
       setModalIdAfterConfirm('');
@@ -273,10 +303,12 @@ function Component ({ className }: Props): React.ReactElement<Props> {
                   />
                 )
                 : (
-                  <Image
-                    src={dfinnLogo}
-                    width={139}
-                  />
+                  <>
+                    <div className='title'>
+                      {t('Welcome to the safest Crypto Wallet!')}
+                    </div>
+                    <div className='welcome-svg'></div>
+                  </>
                 )
             }
           </div>
@@ -288,40 +320,55 @@ function Component ({ className }: Props): React.ReactElement<Props> {
           </div>
         </div>
 
-        <div className='buttons-container'>
-          <div className='buttons'>
-            {buttonList.map((item) => (
-              <Button
-                block={true}
-                className={CN('welcome-import-button', `type-${item.id}`)}
-                contentAlign='left'
-                icon={
-                  <Icon
-                    className='welcome-import-icon'
-                    phosphorIcon={item.icon}
-                    size='md'
-                    weight='fill'
-                  />
-                }
-                key={item.id}
-                loading={item.loading}
-                onClick={onClickToSelectTypeConnect(item.id)}
-                schema={item.schema}
-              >
-                <div className='welcome-import-button-content'>
-                  <div className='welcome-import-button-title'>
-                    {t(item.title)}
+        { isWebUI ? (
+          <div className='buttons-container'>
+            <div className='buttons'>
+              {buttonList.map((item) => (
+                <Button
+                  block={true}
+                  className={CN('welcome-import-button', `type-${item.id}`)}
+                  contentAlign='left'
+                  icon={
+                    <Icon
+                      className='welcome-import-icon'
+                      phosphorIcon={item.icon}
+                      size='md'
+                      weight='fill'
+                    />
+                  }
+                  key={item.id}
+                  loading={item.loading}
+                  onClick={onClickToSelectTypeConnect(item.id)}
+                  schema={item.schema}
+                >
+                  <div className='welcome-import-button-content'>
+                    <div className='welcome-import-button-title'>
+                      {t(item.title)}
+                    </div>
+                    <div className='welcome-import-button-description'>
+                      {t(item.description)}
+                    </div>
                   </div>
-                  <div className='welcome-import-button-description'>
-                    {t(item.description)}
-                  </div>
-                </div>
-              </Button>
-            ))}
-          </div>
+                </Button>
+              ))}
+            </div>
 
-          <div className='divider' />
-        </div>
+            <div className='divider' />
+          </div>)
+          : (
+            <div className={'__group-content'}>
+              {buttonList.map((item) => (
+                <SettingItem
+                  className={'__setting-item'}
+                  leftItemIcon={generateLeftIcon(item.icon)}
+                  name={item.title}
+                  key={item.id}
+                  rightItem={generateRightIcon(ArrowRight)}
+                  onPressItem={onClickToSelectTypeConnect(item.id)}
+                />
+              ))}
+            </div>
+          )}
 
         {isWebUI && (
           <>
@@ -423,6 +470,16 @@ const Welcome = styled(Component)<Props>(({ theme: { token } }: Props) => {
         color: token.colorTextBase
       },
 
+      '.welcome-svg': {
+        width: 200,
+        height: 200,
+        background: `url(${WelcomeSvg}) no-repeat`,
+        backgroundSize: 'cover',
+        position: 'relative',
+        left: '50%',
+        marginLeft: '-100px'
+      },
+
       '.sub-title': {
         marginTop: token.marginXS,
         marginBottom: token.sizeLG * 2 + token.sizeXS,
@@ -451,6 +508,28 @@ const Welcome = styled(Component)<Props>(({ theme: { token } }: Props) => {
         flexDirection: 'column',
         gap: token.sizeXS
       }
+    },
+
+    '.__setting-item': {
+      border: '2px solid #212121',
+      backgroundColor: '#0c0c0c',
+      borderRadius: '32px',
+      marginBottom: '10px',
+
+      '&:hover, .ant-setting-item-content:hover': {
+        borderRadius: '32px',
+        backgroundColor: 'transparent'
+      }
+    },
+    '.__setting-item .ant-web3-block-right-item': {
+      padding: '10px',
+      color: token['colorWhite'],
+      backgroundColor: '#252525',
+      borderRadius: 50,
+      marginRight: 5
+    },
+    '.__setting-item .ant-web3-block-left-item': {
+      marginLeft: '10px'
     },
 
     '.welcome-import-button': {
