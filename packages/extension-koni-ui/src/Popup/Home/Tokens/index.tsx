@@ -21,10 +21,10 @@ import { RootState } from '@subwallet/extension-koni-ui/stores';
 import { ThemeProps, TransferParams } from '@subwallet/extension-koni-ui/types';
 import { TokenBalanceItemType } from '@subwallet/extension-koni-ui/types/balance';
 import { isAccountAll, sortTokenByValue } from '@subwallet/extension-koni-ui/utils';
-import { Button, Icon, Number, Typography } from '@subwallet/react-ui';
+import { Button, Icon, ModalContext, Number, Typography } from '@subwallet/react-ui';
 import BigN from 'bignumber.js';
 import classNames from 'classnames';
-import { Coins, FadersHorizontal, SlidersHorizontal } from 'phosphor-react';
+import { MagnifyingGlass, Coins, FadersHorizontal, SlidersHorizontal } from 'phosphor-react';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useOutletContext } from 'react-router-dom';
@@ -32,6 +32,7 @@ import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 import radial_bg1 from '../../../assets/radial_bg1.png'
 import DetailTable from './DetailTable';
+import { CUSTOMIZE_MODAL } from '@subwallet/extension-koni-ui/constants/modal';
 
 type Props = ThemeProps;
 const BN_0 = new BigN(0);
@@ -44,12 +45,15 @@ const searchFunc = (item: TokenBalanceItemType, searchText: string) => {
   return symbol.includes(searchTextLowerCase);
 };
 
+export const GlobalSearchTokenModalId = 'globalSearchToken';
+
 const Component = (): React.ReactElement => {
   useSetCurrentPage('/home/tokens');
   const { t } = useTranslation();
   const chainInfoMap = useSelector((state: RootState) => state.chainStore.chainInfoMap);
   const [isShrink, setIsShrink] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { activeModal, inactiveModal } = useContext(ModalContext);
   const containerRef = useRef<HTMLDivElement>(null);
   const topBlockRef = useRef<HTMLDivElement>(null);
   const { accountBalance: { tokenGroupBalanceMap,
@@ -67,7 +71,15 @@ const Component = (): React.ReactElement => {
   const searchInput = outletContext?.searchInput;
   const setSearchPlaceholder = outletContext?.setSearchPlaceholder;
   const setShowSearchInput = outletContext?.setShowSearchInput;
+  
+  const onOpenGlobalSearchToken = useCallback(() => {
+    activeModal(GlobalSearchTokenModalId);
+  }, [activeModal]);
 
+  const onOpenCustomizeModal = useCallback(() => {
+    activeModal(CUSTOMIZE_MODAL);
+  }, [activeModal]);
+  
   useEffect(() => {
     setSearchPlaceholder?.(t('Token name'));
     setShowSearchInput?.(true);
@@ -381,9 +393,30 @@ const Component = (): React.ReactElement => {
           totalValue={totalBalanceInfo.convertedValue}
         />
       </div>
-      <div
-        className={'__scroll-container'}
-      >
+      <div className='__buttons'>
+        <div className='tittle'>Tokens</div>
+        <div className='__buttons-search-filter'>
+          <div onClick={onOpenGlobalSearchToken}>
+            <Icon
+              phosphorIcon={MagnifyingGlass}
+              size='md'
+              type='phosphor'
+              iconColor={'#898989'}
+            />
+          </div>
+          <div onClick={onOpenCustomizeModal}>
+            <Icon
+              phosphorIcon={FadersHorizontal}
+              size='md'
+              type='phosphor'
+              iconColor={'#898989'}
+            />
+          </div>
+        </div>
+      </div>
+        <div
+          className={'__scroll-container'}
+        >
         {
           tokenGroupBalanceItems.map((item) => {
             return (
@@ -503,6 +536,17 @@ const Tokens = styled(WrapperComponent)<WrapperProps>(({ theme: { extendToken, t
       overflowY: 'auto',
       overflowX: 'hidden',
       paddingTop: 210
+    },
+
+    '.__buttons':{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: '15px',
+    },
+    '.__buttons-search-filter': {
+      display: 'flex',
+      flexDirection: 'row'
     },
 
     '.__scroll-container': {

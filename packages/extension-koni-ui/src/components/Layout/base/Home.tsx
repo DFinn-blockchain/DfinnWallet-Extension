@@ -5,7 +5,7 @@ import { Layout } from '@subwallet/extension-koni-ui/components';
 import { CUSTOMIZE_MODAL } from '@subwallet/extension-koni-ui/constants/modal';
 import { ScreenContext } from '@subwallet/extension-koni-ui/contexts/ScreenContext';
 import { ButtonProps, Icon, ModalContext } from '@subwallet/react-ui';
-import { FadersHorizontal, MagnifyingGlass } from 'phosphor-react';
+import { FadersHorizontal, MagnifyingGlass, QrCode } from 'phosphor-react';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -14,12 +14,14 @@ type Props = {
   children?: React.ReactNode;
   showFilterIcon?: boolean;
   showSearchIcon?: boolean;
+  showScanIcon?: boolean;
   onClickFilterIcon?: () => void;
   onClickSearchIcon?: () => void;
+  onClickScanIcon?: () => void;
   showTabBar?: boolean
 };
 
-const Home = ({ children, onClickFilterIcon, onClickSearchIcon, showFilterIcon, showSearchIcon, showTabBar }: Props) => {
+const Home = ({ children, onClickFilterIcon, onClickSearchIcon,onClickScanIcon, showFilterIcon, showScanIcon, showSearchIcon, showTabBar }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { activeModal } = useContext(ModalContext);
@@ -41,6 +43,22 @@ const Home = ({ children, onClickFilterIcon, onClickSearchIcon, showFilterIcon, 
           />
         ),
         onClick: onClickFilterIcon || onOpenCustomizeModal,
+        tooltip: isWebUI ? t('Customize your asset display') : undefined,
+        tooltipPlacement: 'bottomRight'
+      });
+    }
+
+    if (showScanIcon) {
+      icons.push({
+        icon: (
+          <Icon
+            phosphorIcon={QrCode}
+            size='md'
+            
+          />
+        ),
+        type: 'text',
+        onClick: onClickScanIcon,
         tooltip: isWebUI ? t('Customize your asset display') : undefined,
         tooltipPlacement: 'bottomRight'
       });

@@ -315,7 +315,7 @@ const NftCollections = styled(Component)<Props>(({ theme: { token } }: Props) =>
       },
 
       '.nft_collection_list__container': {
-        height: '100%',
+        height: '70%',
         flex: 1,
 
         '.ant-sw-list': {

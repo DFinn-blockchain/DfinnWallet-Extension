@@ -15,7 +15,8 @@ import PortfolioPage from '@subwallet/extension-koni-ui/Popup/Home/PortfolioPage
 import { ThemeProps } from '@subwallet/extension-koni-ui/types';
 import { ModalContext } from '@subwallet/react-ui';
 import CN from 'classnames';
-import React, { useCallback, useContext, useEffect } from 'react';
+import { useOpenQrScanner } from '@subwallet/extension-koni-ui/hooks';
+import React, { SyntheticEvent, useCallback, useContext, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
@@ -23,6 +24,7 @@ import { useLocalStorage } from 'usehooks-ts';
 type Props = ThemeProps;
 
 export const GlobalSearchTokenModalId = 'globalSearchToken';
+const scannerId = 'connect-connection-scanner-modal';
 
 function Component ({ className = '' }: Props): React.ReactElement<Props> {
   const { activeModal, inactiveModal } = useContext(ModalContext);
@@ -35,9 +37,12 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
   const { isPortfolio } = useContext(WebUIContext);
   const { isWebUI } = useContext(ScreenContext);
 
-  const onOpenGlobalSearchToken = useCallback(() => {
-    activeModal(GlobalSearchTokenModalId);
-  }, [activeModal]);
+  const openScanner = useOpenQrScanner(scannerId);
+
+  const onOpenScan = useCallback((e?: SyntheticEvent) => {
+    e && e.stopPropagation();
+    openScanner();
+  }, [openScanner]);
 
   const onCloseGlobalSearchToken = useCallback(() => {
     inactiveModal(GlobalSearchTokenModalId);
@@ -72,9 +77,8 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
           {(isPortfolio && isWebUI)
             ? <PortfolioPage />
             : <Layout.Home
-              onClickSearchIcon={onOpenGlobalSearchToken}
-              showFilterIcon
-              showSearchIcon
+                 showScanIcon
+                 onClickScanIcon={onOpenScan}
             >
               <Outlet />
             </Layout.Home>}
