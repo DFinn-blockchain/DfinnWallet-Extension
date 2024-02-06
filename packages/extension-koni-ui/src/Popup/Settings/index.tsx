@@ -218,7 +218,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
     // },
     {
       key: 'about',
-      label: t('About SubWallet'),
+      label: t('About'),
       items: [
         {
           key: 'website',
@@ -341,7 +341,7 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
           </Button>
 
           <div className={'__version'}>
-          SubWallet v {EXTENSION_VERSION} - {WEB_BUILD_NUMBER}
+          Dfinnwallet Web 1.0
           </div>
         </div>
 

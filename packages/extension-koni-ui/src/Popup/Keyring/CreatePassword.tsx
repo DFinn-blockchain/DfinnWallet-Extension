@@ -255,7 +255,7 @@ const Component: React.FC<Props> = ({ className }: Props) => {
                 <Checkbox
                   className={'checkbox'}
                 >
-                  I understand that SubWallet can’t recover the password. <a
+                  I understand tha DFinnwallet can’t recover the password. <a
                     href={TERMS_OF_SERVICE_URL}
                     rel='noreferrer'
                     style={{ textDecoration: 'underline' }}

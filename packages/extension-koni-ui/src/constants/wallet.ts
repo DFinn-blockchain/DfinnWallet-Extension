@@ -11,7 +11,7 @@ export const PREDEFINED_WALLETS: Record<string, WalletInfo> = {
   SubWallet: {
     description: '',
     evmKey: 'SubWallet',
-    icon: DefaultLogosMap.dfinn,
+    icon: DefaultLogosMap.default,
     mcicon: DefaultLogosMap.subwallet_mc,
     key: 'SubWallet',
     name: 'SubWallet',
@@ -21,7 +21,7 @@ export const PREDEFINED_WALLETS: Record<string, WalletInfo> = {
     googlePlayUrl: `https://mobile.subwallet.app/browser?url=${encodedOrigin}`,
     appStoreUrl: `https://mobile.subwallet.app/browser?url=${encodedOrigin}`,
     supportWeb: true,
-    supportMobile: true
+    supportMobile: false
   },
   Talisman: {
     description: '',
@@ -61,7 +61,7 @@ export const PREDEFINED_WALLETS: Record<string, WalletInfo> = {
     googlePlayUrl: 'https://play.google.com/store/apps/details?id=io.novafoundation.nova.market',
     appStoreUrl: 'https://apps.apple.com/us/app/nova-polkadot-kusama-wallet/id1597119355',
     supportWeb: false,
-    supportMobile: true
+    supportMobile: false
   }
 };
 
