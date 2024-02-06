@@ -240,23 +240,7 @@ function Component ({ className, modalContent, slug }: Props) {
     if (urlPromise && serviceInfo && buyInfo.services.includes(service)) {
       const { network: serviceNetwork, symbol } = serviceInfo;
 
-      const disclaimerPromise = new Promise<void>((resolve, reject) => {
-        if (!disclaimerAgree[service]) {
-          onConfirm().then(() => {
-            setDisclaimerAgree((oldState) => ({ ...oldState, [service]: true }));
-            resolve();
-          }).catch((e) => {
-            reject(e);
-          });
-        } else {
-          resolve();
-        }
-      });
-
-      disclaimerPromise.then(() => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        return urlPromise!(symbol, walletAddress, serviceNetwork, walletReference);
-      })
+      urlPromise!(symbol, walletAddress, serviceNetwork, walletReference)
         .then((url) => {
           openInNewTab(url)();
         })
