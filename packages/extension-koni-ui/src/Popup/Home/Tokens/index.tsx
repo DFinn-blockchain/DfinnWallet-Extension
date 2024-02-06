@@ -546,7 +546,11 @@ const Tokens = styled(WrapperComponent)<WrapperProps>(({ theme: { extendToken, t
     },
     '.__buttons-search-filter': {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginRight: '10px'
+    },
+    '.__buttons-search-filter > div:first-child': {
+      marginRight: '15px'
     },
 
     '.__scroll-container': {
