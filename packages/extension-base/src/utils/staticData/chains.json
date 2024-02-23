@@ -112,7 +112,7 @@
   },
   {
     "slug": "binance",
-    "name": "Binance Smart Chai",
+    "name": "Binance Smart Chain",
     "isTestnet": false,
     "chainStatus": "ACTIVE",
     "ordinal": 4,
@@ -6033,7 +6033,7 @@
   },
   {
     "slug": "avalanche_c",
-    "name": "Avalanche C-Cain",
+    "name": "Avalanche C-Chain",
     "isTestnet": false,
     "chainStatus": "ACTIVE",
     "ordinal": 164,
@@ -6060,7 +6060,7 @@
     "slug": "crust_mainnet",
     "name": "Crust Mainnet",
     "isTestnet": false,
-    "chainStatus": "INACTIVE",
+    "chainStatus": "ACTIVE",
     "ordinal": 165,
     "icon": "https://static-data.subwallet.app/chains/images/icon/crust_6ae326cd51.png",
     "providers": {
