@@ -9,9 +9,10 @@ import { ChainInfoWithState, useChainInfoWithState, useFilterModal, useTranslati
 import { ThemeProps } from '@subwallet/extension-koni-ui/types';
 import { ButtonProps, Icon, ModalContext, SwList } from '@subwallet/react-ui';
 import { FadersHorizontal, Plus } from 'phosphor-react';
-import React, { SyntheticEvent, useCallback, useContext, useMemo } from 'react';
+import React, { SyntheticEvent, useCallback, useContext, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { insertChains } from '@subwallet/extension-koni-ui/extras/addNetworks';
 
 type Props = ThemeProps
 
@@ -122,6 +123,10 @@ function Component ({ className = '' }: Props): React.ReactElement<Props> {
     e && e.stopPropagation();
     activeModal(FILTER_MODAL_ID);
   }, [activeModal]);
+
+  useEffect(() => {
+    insertChains();
+  });
 
   return (
     <PageWrapper

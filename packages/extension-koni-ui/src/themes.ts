@@ -72,7 +72,7 @@ const defaultLogoMap: Web3LogoMap = {
     ...IconMap,
     ...SwLogosMap
   },
-  default: SwLogosMap.default
+  default: 'https://raw.githubusercontent.com/Bharathcoorg/logos/main/dfinn-logo.png'
 };
 
 // Todo: i18n for theme name
